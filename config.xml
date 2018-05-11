@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "com.qasid.pronunciationletters"
+    versionCode = "1.0.4"
+    version     = "1.0.4" >
+
+<!-- versionCode is optional and Android only -->
+
+  <name>Arabic Letters Pronunciation</name>
+
+  <description>
+      A Digital Library of video animations explaining the point of articulation of Arabic Letters
+  </description>
+
+  <author href="https://www.qasid.com" email="help@qasid.com">
+      Qasid Arabic Institute
+  </author>
+    
+    <icon src="icon.png" />
+    
+  <splash src="splash.png"/>
+
+</widget>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Arabic Compliments</title>        
+    <link rel="stylesheet" href="css/themes/qasid-commons.css" />
+    <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/commons.css" />      
+    <link rel="stylesheet" href="css/pronunciation.css" />    
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <style type="text/css">
+    @font-face{
+        font-family:"Adelle W01 Regular";
+        src:url("Fonts/e800d24d-133b-4293-a15b-611f67139c09.eot?#iefix");
+        src:url("Fonts/e800d24d-133b-4293-a15b-611f67139c09.eot?#iefix") format("eot"),url("Fonts/f5ebba9f-e1ef-4756-9f7a-d428f532e4cd.woff2") format("woff2"),url("Fonts/89fe91e2-46a0-4e3b-8735-78b3de8da38f.woff") format("woff"),url("Fonts/152fa65e-e42f-431d-a37f-a66d10903310.ttf") format("truetype"),url("Fonts/6ad1d18a-0166-4178-812f-07e16b64000b.svg#6ad1d18a-0166-4178-812f-07e16b64000b") format("svg");
+    }
+    @font-face{
+        font-family:"AvenirNextLTW01-Regular";
+        src:url("Fonts/e9167238-3b3f-4813-a04a-a384394eed42.eot?#iefix");
+        src:url("Fonts/e9167238-3b3f-4813-a04a-a384394eed42.eot?#iefix") format("eot"),url("Fonts/2cd55546-ec00-4af9-aeca-4a3cd186da53.woff2") format("woff2"),url("Fonts/1e9892c0-6927-4412-9874-1b82801ba47a.woff") format("woff"),url("Fonts/46cf1067-688d-4aab-b0f7-bd942af6efd8.ttf") format("truetype"),url("Fonts/52a192b1-bea5-4b48-879f-107f009b666f.svg#52a192b1-bea5-4b48-879f-107f009b666f") format("svg");
+    }
+    @font-face{
+        font-family:"Sakkal Majalla_1188897";
+        src:url("Fonts/995a9042-de35-40fb-859c-4dcb3a1a1927.eot?#iefix");
+        src:url("Fonts/995a9042-de35-40fb-859c-4dcb3a1a1927.eot?#iefix") format("eot"),url("Fonts/9c50ff61-3bc4-45e1-93b6-86c46a274d42.woff2") format("woff2"),url("Fonts/eed2ff57-3c99-45c4-9fe3-4926718ec053.woff") format("woff"),url("Fonts/7738dada-02d8-41d1-8a0a-0f560de6c39a.ttf") format("truetype"),url("Fonts/9ce65b2b-016b-4953-a80a-08a7cb183bdc.svg#9ce65b2b-016b-4953-a80a-08a7cb183bdc") format("svg");
+    }
+    @font-face{
+        font-family:"Sakkal Majalla_1188899";
+        src:url("Fonts/652071be-5a65-41aa-97da-f56a0ccf3933.eot?#iefix");
+        src:url("Fonts/652071be-5a65-41aa-97da-f56a0ccf3933.eot?#iefix") format("eot"),url("Fonts/080fd08e-d083-468c-925f-a7a33a77ce37.woff2") format("woff2"),url("Fonts/69a84019-60fe-4e85-b264-227c7561f42d.woff") format("woff"),url("Fonts/e5eb82a8-990c-4449-9295-49071088337c.ttf") format("truetype"),url("Fonts/cb361494-fdf5-404a-8131-40d2871f4e74.svg#cb361494-fdf5-404a-8131-40d2871f4e74") format("svg");
+    }
+    </style>         
+    <script>
+		var currentAudio = "none";
+		var currentvocab = "";	
+		var currentpage = "";
+		$(function(){
+			$("[data-role='header'], [data-role='footer']" ).toolbar();
+			var rightnav = $("#rightnav");
+            var leftnav = $("#leftnav");
+			var listbtn = $("#listbtn");
+			var searchbtn = $("#searchbtn");
+            var aboutbtn = $("#aboutbtn");
+            var currentLoc = 0;
+			$.mobile.document.on("pagecontainerload", function(){
+				currentAudio = "none";
+			});         
+			$.mobile.document.on("pagecontainerchange", function(){
+				currentpage = document.location.hash;	
+				console.log(currentpage);
+				if (currentpage == "") {
+                    if (rightnav.hasClass("ui-state-disabled") == false) {
+                        rightnav.addClass("ui-state-disabled");
+                        rightnav.attr("href","#");
+                    }
+                    if (leftnav.hasClass("ui-state-disabled") == false) {
+                        leftnav.addClass("ui-state-disabled");
+                        leftnav.attr("href","#");
+                    }
+					if (listbtn.hasClass("listbtndown") == false) {
+						listbtn.addClass("listbtndown");
+					}
+					if (listbtn.hasClass("listbtnup")) {
+						listbtn.removeClass("listbtnup");
+					}	
+                    if (aboutbtn.hasClass("aboutbtndown")) {
+						aboutbtn.removeClass("aboutbtndown");
+					}
+                    if (aboutbtn.hasClass("aboutbtnup") == false) {
+						aboutbtn.addClass("aboutbtnup");
+					}                    
+				} else if (currentpage == "#about"){
+					if (listbtn.hasClass("listbtndown")) {
+						listbtn.removeClass("listbtndown");
+					}	
+					if (listbtn.hasClass("listbtnup") == false) {
+						listbtn.addClass("listbtnup");
+					}  
+                    if (aboutbtn.hasClass("aboutbtnup")) {
+						aboutbtn.removeClass("aboutbtnup");
+					}
+                    if (aboutbtn.hasClass("aboutbtndown") == false) {
+						aboutbtn.addClass("aboutbtndown");
+					}
+                    if (rightnav.hasClass("ui-state-disabled") == false) {
+                        rightnav.addClass("ui-state-disabled");
+                        rightnav.attr("href","#");
+                    }
+                    if (leftnav.hasClass("ui-state-disabled") == false) {
+                        leftnav.addClass("ui-state-disabled");
+                        leftnav.attr("href","#");
+                    }                    
+                } else {
+                    currentLoc = Number(currentpage.substring(currentpage.lastIndexOf("_")+1,currentpage.length));
+                    if (currentLoc == 1) {
+                        if (rightnav.hasClass("ui-state-disabled") == false) {
+                            rightnav.addClass("ui-state-disabled");
+                        }
+                        if (leftnav.hasClass("ui-state-disabled")) {
+                            leftnav.removeClass("ui-state-disabled");
+                        }
+                        rightnav.attr("href","#");
+                        nextLoc = currentLoc+1;
+                        leftnav.attr("href","#p_"+nextLoc.toString());
+                    } else if (currentLoc == 34) {
+                        if (rightnav.hasClass("ui-state-disabled")) {
+                            rightnav.removeClass("ui-state-disabled");
+                        }
+                        if (leftnav.hasClass("ui-state-disabled") == false) {
+                            leftnav.addClass("ui-state-disabled");                            
+                        }
+                        leftnav.attr("href","#");
+                        prevLoc = currentLoc-1;
+                        rightnav.attr("href","#p_"+prevLoc.toString());
+                    } else {
+                        if (rightnav.hasClass("ui-state-disabled")) {
+                            rightnav.removeClass("ui-state-disabled");
+                        }
+                        if (leftnav.hasClass("ui-state-disabled")) {
+                            leftnav.removeClass("ui-state-disabled");                            
+                        }
+                        nextLoc = currentLoc+1;
+                        leftnav.attr("href","#p_"+nextLoc.toString());
+                        prevLoc = currentLoc-1;
+                        rightnav.attr("href","#p_"+prevLoc.toString());
+                        
+                    }
+					if (listbtn.hasClass("listbtndown")) {
+						listbtn.removeClass("listbtndown");
+					}	
+					if (listbtn.hasClass("listbtnup") == false) {
+						listbtn.addClass("listbtnup");
+					}	
+                    if (aboutbtn.hasClass("aboutbtndown")) {
+						aboutbtn.removeClass("aboutbtndown");
+					}
+                    if (aboutbtn.hasClass("aboutbtnup") == false) {
+						aboutbtn.addClass("aboutbtnup");
+					}                     
+				}
+			});
+			var count = $(".vocabAudioSrc").length;
+			$(".vocabAudioSrc").each(function (audio_no) {
+				if (audio_no < count) {
+					this.addEventListener("ended", function () {
+						audioBtn = $( this ).parent().attr('id').toString() + "_btn";
+						$("#"+audioBtn).toggleClass('audio-playing audio-paused');
+						currentAudio = "none";
+					});
+				}
+			});
+			var countbtn = $(".audio-play-pause").length;
+			$(".audio-play-pause").each(function (btn_no) {
+				if (btn_no < countbtn) {
+					this.addEventListener("click", function () {
+						thisAudio = $( this ).parent().attr('id').toString()+"_audio";
+						if ($(this).hasClass('audio-paused')) {
+							if (currentAudio != "none") {
+								$("#"+currentAudio)[0].pause();
+								btnName = currentAudio.substring(0,currentAudio.indexOf("_audio"))+"_btn";
+								$("#"+btnName).toggleClass('audio-paused audio-playing');
+							}
+							currentAudio = thisAudio;	
+							$("#"+thisAudio)[0].play();
+							$(this).toggleClass('audio-playing audio-paused');
+						} else {
+							currentAudio = "none";
+							$("#"+thisAudio)[0].pause();
+							$(this).toggleClass('audio-paused audio-playing');
+						}					
+					});
+				}
+			});			
+		});
+    </script>   
+    </head>
+    <body>
+    <div id="container">
+        <div data-role="header" data-position="fixed" data-theme="a" id="topbar">
+            <a href="#" class="ui-btn-right ui-btn ui-icon-carat-r ui-btn-icon-notext ui-corner-all ui-state-disabled" id="rightnav">Previous</a>
+ 	  		<h1 class="englishText">Arabic Letters Pronunciation</h1>
+            <a href="#" class="ui-btn-left ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all ui-state-disabled" id="leftnav">Next</a>
+		</div>
+  	
+  	   	<section id="home" data-role="page">
+    		<div class="ui-content mainTitle bookimg" role="main">
+			</div>
+   			<ul data-role="listview" data-theme="b" id="letterslist" data-filter="true" data-filter-placeholder="Find Letters..." data-filter-theme="a" data-icon="custom">
+                <li data-role="list-divider" data-theme="a">الجوف</li>
+                <li data-icon='carat-l'><a href='#p_1'><img src='images/1_1.png' class='list-image'/>الألف المدية</a></li>
+                <li data-icon='carat-l'><a href='#p_2'><img src='images/1_2.png' class='list-image'/>الواو المدية</a></li>
+                <li data-icon='carat-l'><a href='#p_3'><img src='images/1_3.png' class='list-image'/>الياء المدية</a></li>
+                <li data-role="list-divider" data-theme="a">الحلق</li>
+                <li data-icon='carat-l'><a href='#p_4'><img src='images/2_4.png' class='list-image'/>الهمزة</a></li>
+                <li data-icon='carat-l'><a href='#p_5'><img src='images/2_5.png' class='list-image'/>الهاء</a></li>
+                <li data-icon='carat-l'><a href='#p_6'><img src='images/2_6.png' class='list-image'/>العين</a></li>
+                <li data-icon='carat-l'><a href='#p_7'><img src='images/2_7.png' class='list-image'/>الحاء</a></li>
+                <li data-icon='carat-l'><a href='#p_8'><img src='images/2_8.png' class='list-image'/>الغين</a></li>
+                <li data-icon='carat-l'><a href='#p_9'><img src='images/2_9.png' class='list-image'/>الخاء</a></li>
+                <li data-role="list-divider" data-theme="a">السان</li>
+                <li data-icon='carat-l'><a href='#p_10'><img src='images/3_10.png' class='list-image'/>القاف</a></li>
+                <li data-icon='carat-l'><a href='#p_11'><img src='images/3_11.png' class='list-image'/>الكاف</a></li>
+                <li data-icon='carat-l'><a href='#p_12'><img src='images/3_12.png' class='list-image'/>الجيم</a></li>
+                <li data-icon='carat-l'><a href='#p_13'><img src='images/3_13.png' class='list-image'/>الشين</a></li>
+                <li data-icon='carat-l'><a href='#p_14'><img src='images/3_14.png' class='list-image'/>الياء غير المدية</a></li>
+                <li data-icon='carat-l'><a href='#p_15'><img src='images/3_15.png' class='list-image'/>الضاء</a></li>
+                <li data-icon='carat-l'><a href='#p_16'><img src='images/3_16.png' class='list-image'/>اللام</a></li>
+                <li data-icon='carat-l'><a href='#p_17'><img src='images/3_17.png' class='list-image'/>النون</a></li>
+                <li data-icon='carat-l'><a href='#p_18'><img src='images/3_18.png' class='list-image'/>الرّاء المرققة</a></li>
+                <li data-icon='carat-l'><a href='#p_19'><img src='images/3_19.png' class='list-image'/>الرّاء المفخمة</a></li>
+                <li data-icon='carat-l'><a href='#p_20'><img src='images/3_20.png' class='list-image'/>الطّاء</a></li>
+                <li data-icon='carat-l'><a href='#p_21'><img src='images/3_21.png' class='list-image'/>الدّال</a></li>
+                <li data-icon='carat-l'><a href='#p_22'><img src='images/3_22.png' class='list-image'/>التّاء</a></li>
+                <li data-icon='carat-l'><a href='#p_23'><img src='images/3_23.png' class='list-image'/>الصّاد</a></li>
+                <li data-icon='carat-l'><a href='#p_24'><img src='images/3_24.png' class='list-image'/>السّين</a></li>
+                <li data-icon='carat-l'><a href='#p_25'><img src='images/3_25.png' class='list-image'/>الزّاي</a></li>
+                <li data-icon='carat-l'><a href='#p_26'><img src='images/3_26.png' class='list-image'/>الظّاء</a></li>
+                <li data-icon='carat-l'><a href='#p_27'><img src='images/3_27.png' class='list-image'/>الذّال</a></li>
+                <li data-icon='carat-l'><a href='#p_28'><img src='images/3_28.png' class='list-image'/>الثّاء</a></li>
+                <li data-role="list-divider" data-theme="a">الشفتان</li>
+                <li data-icon='carat-l'><a href='#p_29'><img src='images/4_29.png' class='list-image'/>الفاء</a></li>
+                <li data-icon='carat-l'><a href='#p_30'><img src='images/4_30.png' class='list-image'/>الواو</a></li>
+                <li data-icon='carat-l'><a href='#p_31'><img src='images/4_31.png' class='list-image'/>الميم</a></li>
+                <li data-icon='carat-l'><a href='#p_32'><img src='images/4_32.png' class='list-image'/>الباء</a></li>
+                <li data-role="list-divider" data-theme="a">الخيشوم</li>
+                <li data-icon='carat-l'><a href='#p_33'><img src='images/5_33.png' class='list-image'/>النون</a></li>
+                <li data-icon='carat-l'><a href='#p_34'><img src='images/5_34.png' class='list-image'/>الميم</a></li>
+		 	</ul>
+		</section>
+   	
+<section id='p_1' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الجوف: الألف المدية: آ</div><video preload='auto' controls><source src='video/1_1.mp4' type='video/mp4'></video></div></section>
+<section id='p_2' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الجوف: الواو المدية: و</div><video preload='auto' controls><source src='video/1_2.mp4' type='video/mp4'></video></div></section>
+<section id='p_3' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الجوف: الياء المدية: ي</div><video preload='auto' controls><source src='video/1_3.mp4' type='video/mp4'></video></div></section>
+<section id='p_4' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الحلق: الهمزة: ء</div><video preload='auto' controls><source src='video/2_4.mp4' type='video/mp4'></video></div></section>
+<section id='p_5' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الحلق: الهاء: ه</div><video preload='auto' controls><source src='video/2_5.mp4' type='video/mp4'></video></div></section>
+<section id='p_6' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الحلق: العين: ع</div><video preload='auto' controls><source src='video/2_6.mp4' type='video/mp4'></video></div></section>
+<section id='p_7' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الحلق: الحاء: ح</div><video preload='auto' controls><source src='video/2_7.mp4' type='video/mp4'></video></div></section>
+<section id='p_8' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الحلق: الغين: غ</div><video preload='auto' controls><source src='video/2_8.mp4' type='video/mp4'></video></div></section>
+<section id='p_9' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الحلق: الخاء: خ</div><video preload='auto' controls><source src='video/2_9.mp4' type='video/mp4'></video></div></section>
+<section id='p_10' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: القاف: ق</div><video preload='auto' controls><source src='video/3_10.mp4' type='video/mp4'></video></div></section>
+<section id='p_11' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: الكاف: ك</div><video preload='auto' controls><source src='video/3_11.mp4' type='video/mp4'></video></div></section>
+<section id='p_12' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: الجيم: ج</div><video preload='auto' controls><source src='video/3_12.mp4' type='video/mp4'></video></div></section>
+<section id='p_13' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: الشين: ش</div><video preload='auto' controls><source src='video/3_13.mp4' type='video/mp4'></video></div></section>
+<section id='p_14' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: الياء غير المدية: ي</div><video preload='auto' controls><source src='video/3_14.mp4' type='video/mp4'></video></div></section>
+<section id='p_15' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: الضاء: ض</div><video preload='auto' controls><source src='video/3_15.mp4' type='video/mp4'></video></div></section>
+<section id='p_16' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: اللام: ل</div><video preload='auto' controls><source src='video/3_16.mp4' type='video/mp4'></video></div></section>
+<section id='p_17' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: النون: ن</div><video preload='auto' controls><source src='video/3_17.mp4' type='video/mp4'></video></div></section>
+<section id='p_18' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: الرّاء المرققة: ر</div><video preload='auto' controls><source src='video/3_18.mp4' type='video/mp4'></video></div></section>
+<section id='p_19' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: الرّاء المفخمة: ر</div><video preload='auto' controls><source src='video/3_19.mp4' type='video/mp4'></video></div></section>
+<section id='p_20' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: الطّاء: ط</div><video preload='auto' controls><source src='video/3_20.mp4' type='video/mp4'></video></div></section>
+<section id='p_21' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: الدّال: د</div><video preload='auto' controls><source src='video/3_21.mp4' type='video/mp4'></video></div></section>
+<section id='p_22' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: التّاء: ت</div><video preload='auto' controls><source src='video/3_22.mp4' type='video/mp4'></video></div></section>
+<section id='p_23' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: الصّاد: ص</div><video preload='auto' controls><source src='video/3_23.mp4' type='video/mp4'></video></div></section>
+<section id='p_24' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: السّين: س</div><video preload='auto' controls><source src='video/3_24.mp4' type='video/mp4'></video></div></section>
+<section id='p_25' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: الزّاي: ز</div><video preload='auto' controls><source src='video/3_25.mp4' type='video/mp4'></video></div></section>
+<section id='p_26' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: الظّاء: ظ</div><video preload='auto' controls><source src='video/3_26.mp4' type='video/mp4'></video></div></section>
+<section id='p_27' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: الذّال: ذ</div><video preload='auto' controls><source src='video/3_27.mp4' type='video/mp4'></video></div></section>
+<section id='p_28' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>السان: الثّاء: ث</div><video preload='auto' controls><source src='video/3_28.mp4' type='video/mp4'></video></div></section>
+<section id='p_29' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الشفتان: الفاء: ف</div><video preload='auto' controls><source src='video/4_29.mp4' type='video/mp4'></video></div></section>
+<section id='p_30' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الشفتان: الواو: و</div><video preload='auto' controls><source src='video/4_30.mp4' type='video/mp4'></video></div></section>
+<section id='p_31' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الشفتان: الميم: م</div><video preload='auto' controls><source src='video/4_31.mp4' type='video/mp4'></video></div></section>
+<section id='p_32' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الشفتان: الباء: ب</div><video preload='auto' controls><source src='video/4_32.mp4' type='video/mp4'></video></div></section>
+<section id='p_33' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الخيشوم: النون: ن</div><video preload='auto' controls><source src='video/5_33.mp4' type='video/mp4'></video></div></section>
+<section id='p_34' data-role='page'><div class='ui-content mainTitle bookimg' role='main'></div><div class='videocontainer'><div class='arabic-h2'>الخيشوم: الميم: م</div><video preload='auto' controls><source src='video/5_34.mp4' type='video/mp4'></video></div></section>
+        
+		<section id="about" data-role="page">
+            <div class="ui-content mainTitleE aboutimg" role="main">
+			</div>
+            <div class="bodypage englishBody">
+            <h2>Sponsored by Qasid Arabic Institute</h2>
+            <h3>About the Institute</h3>
+            <blockquote>The word <b>qasid</b> is used to describe a path that is direct and smooth. This is the way we believe the Arabic language should be taught. The Qasid Institute for Arabic has quietly developed a reputation as one of the leading centers in the Middle East for Arabic language learning. A comprehensive curriculum taught over five distinct levels takes a student from the proper pronunciation of letters to a level of mastery.</blockquote>
+            <p>Graduating students who have applied themselves will find that understanding an all-Arabic university course to be within reach, and translating general texts to be manageable. Our graduate-level modules prepare advanced students to teach Arabic and Middle East Studies, something that a number of our alumni now do at universities throughout the US and Europe. To indicate something about its level of rigor, Qasid’s Summer Intensive Program (SIP) has a higher percentage of Ivy League students vis a vis the rest of its student body than any other private Arabic language institute in the Middle East.</p>
+            <p>The term qasid is also used to describe an individual who strives forward with a direct, specific intention, which is a dictionary-perfect definition for the kind of student that Qasid attracts. Although designed mainly for university-level students and time-starved professionals, Qasid students have come as young as 15 and as old as 65. Our students include consulate officers, Fulbright researchers, full-time mothers, medical doctors, FLAS recipients, and Ivy League graduates, and hail from nearly two dozen countries.</p>
+            <h2>An Ideal Location</h2>
+            <p>Many scholars of Arabic have noted that the Jordanian dialect is among the closest to Classical Arabic (fusha), making Amman an ideal setting for learning-or perfecting-one’s Arabic. An inherent shortcoming of university-based Arabic instruction is the lack of daily, out-of-classroom practice. Language learning requires practice-and lots of it. For this reason, regardless of how many years of formal study a student has had, a several-month immersion in an Arabic-rich setting is critical for intermediate/advanced mastery of the language.</p>
+            <p>At the same time, English is a second language for many residents of Amman, meaning that in dealings with cab drivers, shopkeepers, and others, beginners have a support ready, in case words from a particular lesson slip their minds. Jordan has a rich Arab and Islamic heritage, and the natural hospitality of the Jordanian people will be the source of many endearing memories.</p>
+            <h2>Facilities</h2>
+            <p>Our campus is housed in an 8,000 square foot facility on University Street in the Sport City district of Amman. Classes are conducted in classrooms each bearing the name of one of the historically-significant centers of learning in Islamic history (Cairo, Istanbul, Baghdad, Damascus, etc.), and feature custom-made wood tables in U and L configurations to foster discussion. Complimentary wi-fi extends to every classroom, a book store and copy center serves students and staff alike, and a spacious conference hall accommodates seminars and presentations delivered by special-invite guests. Within easy reach are numerous malls and shopping outlets, art and cultural centers, sports and gym facilities, and bookstores. It is an optimal locale for those desiring to immerse themselves in the active hustle and bustle of one of the most dynamic capital cities in the Arab world.</p>
+            </div>
+		</section>        
+				  
+		<div data-role="footer" data-position="fixed" data-theme="b" class="footernav">
+			<div data-role="navbar" data-grid="a" class="footernav">
+				<ul>
+					<li><a href="#home" class="listbtndown" data-icon="custom" id="listbtn">Letters</a></li>
+                    <li><a href="#about" data-icon="custom" class="aboutbtnup" id="aboutbtn">About</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!-- /footer -->  
+        
+        </div>
+    </body>
+</html>
